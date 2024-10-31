@@ -42,7 +42,7 @@
         <td>chief</td>
         <td>keef</td>
         <td>
-        <i class="bi bi-pencil-square"></i>
+       
         </td>
 
 
