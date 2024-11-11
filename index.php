@@ -7,6 +7,8 @@
 
    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/5f9059d052.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
 
@@ -34,24 +36,47 @@
 
     </tr>
   </thead>
-  <tbody>
-    <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>chief</td>
-        <td>keef</td>
-        <td>
+  <tbody> 
+    <?php
+    include "db_conn.php";
+
+    $sql = "SELECT * FROM crud ";
+    $result = mysqli_query($conn, $sql);
+    while ($row = mysqli_fetch_assoc($result)) {
+
+      ?>
+      <tr>
+        <td scope="row"><?php echo $row['id'] ?></td>
+        <td scope="row"><?php echo $row['nom'] ?></td>
+        <td scope="row"><?php echo $row['prenom'] ?></td>
+        <td scope="row"><?php echo $row['email'] ?></td>
+        <td scope="row"><?php echo $row['genre'] ?></td>
        
+        <td>
+
+        <a href="edit.php?id=<?php echo $row['id'] ?>" class="link-dark"><i class="bi bi-pencil-square"></i></a>
+        <a href="delete.php?id=<?php echo $row['id'] ?>" class="link-dark"><i class="bi bi-trash3-fill"></i></a>
+          
         </td>
-
-
-
-
-
-
-
     </tr>
+
+      
+    <?php
+
+
+
+
+    }
+
+
+    
+    ?>
+
+  
+
+
+
+    
    
    
   </tbody>
