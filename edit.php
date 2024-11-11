@@ -50,38 +50,52 @@ if (isset($_POST['submit'])) {
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="#">CRUD PHP + Bootstrap</a>
+            <a class="navbar-brand" href="#">Modifier un utilisateur</a>
         </div>
     </nav>
+
+
+    <?php
+
+    $id = $_GET['id'];
+    $sql = "SELECT * FROM crud WHERE id = $id LIMIT 1";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+    
+    
+    ?>
 
     <div class="container mt-4">
         <!-- Formulaire pour ajouter un utilisateur -->
         <form id="user-form" action="add_new.php" method="POST" onsubmit="event.preventDefault(); handleSubmit();">
             <div class="mb-3">
                 <label for="first-name" class="form-label">Prénom :</label>
-                <input type="text" id="first-name" name="first-name" class="form-control" required>
+                <input type="text" id="first-name" name="first-name" class="form-control" value="<?php echo $row['nom'] ?>">
             </div>
 
             <div class="mb-3">
                 <label for="last-name" class="form-label">Nom :</label>
-                <input type="text" id="last-name" name="last-name" class="form-control" required>
+                <input type="text" id="last-name" name="last-name" class="form-control" value="<?php echo $row['prenom'] ?>">
             </div>
 
             <div class="mb-3">
                 <label for="email" class="form-label">Email :</label>
-                <input type="email" id="email" name="email" class="form-control" required>
+                <input type="email" id="email" name="email" class="form-control" value="<?php echo $row['email'] ?>">
             </div>
 
             <div class="mb-3">
                 <label for="gender" class="form-label">Genre :</label>
-                <select id="gender" name="gender" class="form-select" required>
-                    <option value="homme">Homme</option>
-                    <option value="femme">Femme</option>
+                
+                <select id="gender" name="gender" class="form-select" >
+                    <option value="homme" <?php echo ($row['genre'] == 'homme')?
+                    "selected":""; ?>>Homme</option>
+                    <option value="femme"  <?php echo ($row['genre'] == 'femme')?
+                    "selected":""; ?>>Femme</option>
                 </select>
             </div>
 
-            <button type="submit" name="submit" class="btn btn-primary">Ajouter</button>
-            <button type="button" class="btn btn-secondary" onclick="resetForm()">Annuler</button>
+            <button type="submit" name="submit" class="btn btn-primary">Modifier</button>
+            <a href="index.php" class="btn btn-outline-secondary">Annuler</a>
         </form>
     </div>
 
